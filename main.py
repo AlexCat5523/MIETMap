@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
+from credentials import *
 import base64
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '34y5h23k46yu'
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 @app.route('/', methods=['GET', 'POST', 'FETCH'])

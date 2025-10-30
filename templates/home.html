@@ -3,14 +3,68 @@
     <head>
         <title>Main</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     </head>
     <body>
-        <ul>
-            {% for i in range(5) %}
-                <li>
-                    <h1>Hello World</h1>
-                </li>
-            {% endfor %}
-        </ul>
+        <main>
+            <div class="navigation">
+
+                <div class="navbar">
+                    <select id="buildings" name="buildings">
+                        <option value="0" selected disabled>Выберите корпус</option>
+                        {% for i in nav_data['buildings'] %}
+                            <option id="buildings{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="days" name="days">
+                        <option value="0" selected disabled>Выберите день</option>
+                        {% for i in nav_data['days'] %}
+                            <option id="days{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="weeks" name="weeks">
+                        <option value="0" selected disabled>Выберите неделю</option>
+                        {% for i in nav_data['weeks'] %}
+                            <option id="weeks{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="time" name="time">
+                        <option value="0" selected disabled>Выберите пару</option>
+                        {% for i in nav_data['time'] %}
+                            <option id="time{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <button id="navbutton">Найти</button>
+                </div>
+
+                <div id="free_rooms">
+                    Rooms
+                </div>
+            </div>
+            <div class="gridcontainer floor">
+                <div class="left item">
+                    {% for i in range(10, 21) %}
+                        <div class="classroom-side" id="{{ i }}"></div>
+                    {% endfor %}
+                </div>
+                <div class="right item">
+                    {% for i in range(32, 44) %}
+                        <div class="classroom-side" id="{{ i }}"></div>
+                    {% endfor %}
+                </div>
+                <div class="top item">
+                    {% for i in range(21, 32) %}
+                        <div class="classroom-up" id="{{ i }}"></div>
+                    {% endfor %}
+                </div>
+                <div class="bottom item">
+                    {% for i in range(10) %}
+                        <div class="classroom-up" id="0{{ i }}"></div>
+                    {% endfor %}
+                </div>
+                <div class="floorcenter"></div>
+            </div>
+        </main>
     </body>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
 </html>

@@ -107,12 +107,32 @@ def request_to_schedule(one_group=False):  # ~ 2.15s for 10 operations (so for a
     print(bugs)
 
 
-def console_input(building, day, dayNumber, time):
+def divide_classes_by_floors(classes=set()) -> dict:
+    res = {
+        '1': list(),
+        '2': list(),
+        '3': list()
+    }
+    for i in list(classes):
+        floor = i[0][1]
+        res[floor].append(i)
+        
+    return res
+
+
+def get_classes(building, day, week, t) -> dict:
     db = sqlite3.connect('data\classrooms.db')
     cur = db.cursor()
+    chosen = set()
     
-    for i in cur.execute('SELECT * FROM classrooms WHERE room LIKE ? AND day=? AND dayNumber=? AND time=?', (f'{building}___', day, dayNumber, time, )):
-        print(i)
+    building = list(cur.execute('SELECT value FROM buildings WHERE id=?', (building, )).fetchone())[0]
+    
+    for i in cur.execute('SELECT * FROM classrooms WHERE room LIKE ? AND day=? AND dayNumber=? AND time=?', (f'{building}___%', day, week, t, )):
+        if '[Лек]' in i[4]:
+            chosen.add(i[:-1])
+        else:
+            chosen.add(i)
 
-
-console_input('3', 0, 0, 1)
+    chosen = divide_classes_by_floors(chosen)
+    
+    return chosen

@@ -1,0 +1,116 @@
+main {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+
+    height: auto;
+    width: 100%;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    overflow: hidden;
+}
+
+.classroom-side {
+    width: 52%;
+    height: 8%;
+    position: relative;
+    border: solid black 2px;
+}
+
+.classroom-up {
+    width: 8%;
+    height: 52%;
+    position: relative;
+    border: solid black 2px;
+}
+
+.gridcontainer {
+    position: relative;
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-template-columns: 20% 20% 20% 20% 20% ;
+
+}
+
+.nodots {
+    list-style-type: none;
+}
+
+.nopadding {
+    padding: 0;
+}
+
+.item {
+    background-color: pink;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+
+    grid-row-start: 2;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    
+    grid-row-start: 2;
+    grid-row-end: 5;
+    grid-column-start: 5;
+    grid-column-end: 5;
+}
+.top {
+    display: flex;
+    
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    
+    grid-row-start: 5;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+.floorcenter {
+    background-color: black;
+
+    grid-row-start: 2;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+.floor {
+    width: 428px;
+    height: 428px;
+    justify-self: flex-start;
+    border: solid black 10px;
+    order: -1;
+}
+
+.navigation {
+    justify-self: flex-end;
+    flex-grow: 1;
+    height: 100%;
+
+    background-color: palegreen;
+}

@@ -1,6 +1,7 @@
 main {
     position: relative;
     display: flex;
+    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 
@@ -10,9 +11,9 @@ main {
 
 body {
     height: 100vh;
-    width: 100vw;
+    width: 95vw;
 
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .classroom-side {
@@ -27,6 +28,10 @@ body {
     height: 52%;
     position: relative;
     border: solid black 2px;
+}
+
+.classroom-up > div {
+    transform: rotate(90deg);
 }
 
 .gridcontainer {
@@ -104,13 +109,54 @@ body {
     height: 428px;
     justify-self: flex-start;
     border: solid black 10px;
-    order: -1;
 }
 
 .navigation {
     justify-self: flex-end;
+    order: 0;
     flex-grow: 1;
     height: 100%;
 
     background-color: palegreen;
+}
+
+
+.floorselector {
+    display: grid;
+    width: 410px;
+    height: 25%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-template-columns: 20% 20% 20% 20% 20% ;
+}
+
+.floorselector select {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+
+#changefloorbtn {
+    top: 20%;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
+
+.closer {
+    width: 29%;
+    height: 64px;
+    border: 2px black solid;
+    margin: 25px;
+    background-color: rgb(182, 48, 48);
+}
+
+.closer:hover {
+    cursor: pointer;
+}
+
+.closed {
+    display: none;
 }

@@ -41,29 +41,36 @@
                     Rooms
                 </div>
             </div>
-            <div class="gridcontainer floor">
-                <div class="left item">
-                    {% for i in range(10, 21) %}
-                        <div class="classroom-side" id="{{ i }}"></div>
-                    {% endfor %}
+            {% for i in range(3) %}
+                <div class="closer" id="closer{{ i }}" onclick="printhello(this.id)"><h1>{{ i + 1}}-й этаж</h1></div>
+                <div class="gridcontainer floor closed" id="floor{{ i }}">
+                    <div class="left item">
+                        {% for j in range(39, 53) %}
+                            <div class="classroom-side classroom" id="{{ i + 1 }}{{ j }}"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="right item">
+                        {% for j in range(26, 39) %}
+                            <div class="classroom-side classroom" id="{{ i + 1 }}{{ j }}"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="top item">
+                        {% for j in range(13, 26) %}
+                            <div class="classroom-up classroom" id="{{ i + 1 }}{{ j }}"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="bottom item">
+                        {% for j in range(1, 13) %}
+                            {% if (j < 10) %}
+                                <div class="classroom-up classroom" id="{{ i + 1 }}0{{ j }}"></div>
+                            {% else %}
+                                <div class="classroom-up classroom" id="{{ i + 1 }}{{ j }}"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="floorcenter"></div>
                 </div>
-                <div class="right item">
-                    {% for i in range(32, 44) %}
-                        <div class="classroom-side" id="{{ i }}"></div>
-                    {% endfor %}
-                </div>
-                <div class="top item">
-                    {% for i in range(21, 32) %}
-                        <div class="classroom-up" id="{{ i }}"></div>
-                    {% endfor %}
-                </div>
-                <div class="bottom item">
-                    {% for i in range(10) %}
-                        <div class="classroom-up" id="0{{ i }}"></div>
-                    {% endfor %}
-                </div>
-                <div class="floorcenter"></div>
-            </div>
+            {% endfor %}
         </main>
     </body>
     <script src="{{ url_for('static', filename='home.js') }}"></script>

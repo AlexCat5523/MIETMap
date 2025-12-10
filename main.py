@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from credentials import *
 from functions import *
-from exceptions import ZeroInputError
 import base64
 
 app = Flask(__name__)

@@ -13,9 +13,18 @@ async function getclasses() {
 }
 
 
-// Select occupied classes on the map
+// Select occupied classes on the map (DOESN'T clear previously occupied classes)
 function putclasses(data) {
     console.log(data)
+    let all_rooms = document.getElementsByClassName('item')
+
+    for (let i = 1 ; i < all_rooms.length; i++) {
+        let room = all_rooms[i];
+        if (room.childElementCount != 0) {
+            room.removeChild(room.childNodes[0])
+            room.style.backgroundColor = 'white'
+        }
+    }
     for (let i = 1; i < 4; i++) {
         let floor = data['info'][String(i)]
 

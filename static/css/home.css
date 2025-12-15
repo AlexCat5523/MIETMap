@@ -5,8 +5,13 @@ main {
     flex-wrap: nowrap;
     justify-content: space-evenly;
 
-    height: auto;
+    gap: 1em;
+
+    height: 100%;
     width: 100%;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 32px;
 }
 
 body {
@@ -48,6 +53,10 @@ body {
 
 .nopadding {
     padding: 0;
+}
+
+.non-selectable {
+    user-select: none;
 }
 
 .item {
@@ -108,32 +117,107 @@ body {
     width: 428px;
     height: 428px;
     justify-self: flex-start;
+    align-self: center;
     border: solid black 10px;
 }
 
 .navigation {
+    display: flex;
     justify-self: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
     order: 0;
+    
     flex-grow: 1;
-    height: 100%;
+    flex-shrink: 0;
+    height: 120px;
+    width: 100%;
 
-    background-color: palegreen;
+    background-color: #0F45C7;
+    border: 1px solid #0F45C7;
+    border-radius: 32px;
+    margin-bottom: 2px;
 }
 
 
 .floorselector {
-    display: grid;
-    width: 410px;
-    height: 25%;
-    grid-template-rows: 20% 20% 20% 20% 20%;
-    grid-template-columns: 20% 20% 20% 20% 20% ;
+    position: relative;
+    width: fit-content;
+    display: flex;
+    align-items: baseline;
+
+    justify-content: center;
 }
 
-.floorselector select {
-    grid-row-start: 1;
-    grid-row-end: 1;
-    grid-column-start: 1;
-    grid-column-end: 4;
+.floorselector > button {
+    font-size: large;
+    background-color: orange;
+    color: white;
+    flex-grow: 1;
+    z-index: 2;
+    order: 1;
+
+    padding: 10px;
+    border: 1px orange solid;
+    border-radius: 16px;
+    user-select: none;
+    transition: 0.3s ease-in-out;
+}
+
+.floorselector:hover > button {
+    cursor: pointer;
+    color: black;
+    border: 1px transparent solid;
+    background-color: white;
+    position: relative;
+    transform: translateX(-95%);
+    border-right: 25% transparent;
+}
+
+.floorselector:hover > .dropdown-floors {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-floors {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: flex;
+    align-items: center;
+    transform: translateX(-100%);
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 0.3s ease-in-out;
+}
+
+.dropdown-floors > span { 
+    text-decoration: none;
+    font-size: medium;
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 5px;
+    user-select: none;
+    cursor: pointer;
+    
+    transition: 0.3s ease-out;
+    /* width: fit-content; */
+}
+
+.dropdown-floors > span:hover {
+    background-color: #0F45C7;
+    color: white;
+    
+}
+
+.dropdown-floors > span > p {
+    margin: 0;
+    width: fit-content;
 }
 
 
@@ -147,16 +231,39 @@ body {
 
 .closer {
     width: 29%;
-    height: 64px;
-    border: 2px black solid;
-    margin: 25px;
-    background-color: rgb(182, 48, 48);
+    height: 52px;
+    border: 2px transparent solid;
+    align-self: center;
+    color: white;
+    background-color: #0F45C7;
+    border-radius: 16px;
+    transition: border-radius 0.3s ease-in-out;
+}
+
+.closer > h1 {
+    text-align: center;
+    height: 100%;
+    line-height: 52px;
+    margin: 0;
+    padding: 0;
+    user-select: none;
 }
 
 .closer:hover {
     cursor: pointer;
+    border-radius: 64px;
 }
 
 .closed {
     display: none;
+}
+
+.not_visible {
+    display: none;
+}
+
+#allrooms {
+    align-self: center;
+    justify-self: flex-end;
+    flex-grow: 1;
 }

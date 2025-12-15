@@ -6,71 +6,81 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     </head>
     <body>
-        <main>
-            <div class="navigation">
-
-                <div class="navbar">
-                    <select id="buildings" name="buildings">
-                        <option value="0" selected disabled>Выберите корпус</option>
-                        {% for i in nav_data['buildings'] %}
-                            <option id="buildings{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                    <select id="days" name="days">
-                        <option value="0" selected disabled>Выберите день</option>
-                        {% for i in nav_data['days'] %}
-                            <option id="days{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                    <select id="weeks" name="weeks">
-                        <option value="0" selected disabled>Выберите неделю</option>
-                        {% for i in nav_data['weeks'] %}
-                            <option id="weeks{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                    <select id="time" name="time">
-                        <option value="0" selected disabled>Выберите пару</option>
-                        {% for i in nav_data['time'] %}
-                            <option id="time{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                    <button id="navbutton">Найти</button>
-                </div>
-
-                <div id="free_rooms">
-                    Rooms
+        <div class="navigation">
+            <div class="navbar">
+                <select id="buildings" name="buildings">
+                    <option value="0" selected disabled>Выберите корпус</option>
+                    {% for i in nav_data['buildings'] %}
+                        <option id="buildings{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select id="days" name="days">
+                    <option value="0" selected disabled>Выберите день</option>
+                    {% for i in nav_data['days'] %}
+                        <option id="days{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select id="weeks" name="weeks">
+                    <option value="0" selected disabled>Выберите неделю</option>
+                    {% for i in nav_data['weeks'] %}
+                        <option id="weeks{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select id="time" name="time">
+                    <option value="0" selected disabled>Выберите пару</option>
+                    {% for i in nav_data['time'] %}
+                        <option id="time{{ loop.index }}" value="{{ loop.index }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <button id="navbutton">Найти</button>
+            </div>
+            <div class="floorselector">
+                <button>Выбрать этаж</button>
+                <div class="dropdown-floors">
+                    {% for i in range(3) %}
+                    <span id="floorselect{{ i }}" onclick="selectFloor(this.id)">{{ i + 1 }}-й этаж</span>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+        <main>
             {% for i in range(3) %}
-                <div class="closer" id="closer{{ i }}" onclick="printhello(this.id)"><h1>{{ i + 1}}-й этаж</h1></div>
+                {% if i == 0 %}
+                <div class="closer" id="closer{{ i }}" onclick="closure(this.id)"><h1>{{ i + 1}}-й этаж</h1></div>
+                {% else %}
+                <div class="closer not_visible" id="closer{{ i }}" onclick="closure(this.id)"><h1>{{ i + 1}}-й этаж</h1></div>
+                {% endif %}
                 <div class="gridcontainer floor closed" id="floor{{ i }}">
                     <div class="left item">
                         {% for j in range(39, 53) %}
-                            <div class="classroom-side classroom" id="{{ i + 1 }}{{ j }}"></div>
+                            <div class="classroom-side classroom non-selectable" id="{{ i + 1 }}{{ j }}"></div>
                         {% endfor %}
                     </div>
                     <div class="right item">
                         {% for j in range(26, 39) %}
-                            <div class="classroom-side classroom" id="{{ i + 1 }}{{ j }}"></div>
+                            <div class="classroom-side classroom non-selectable" id="{{ i + 1 }}{{ j }}"></div>
                         {% endfor %}
                     </div>
                     <div class="top item">
                         {% for j in range(13, 26) %}
-                            <div class="classroom-up classroom" id="{{ i + 1 }}{{ j }}"></div>
+                            <div class="classroom-up classroom non-selectable" id="{{ i + 1 }}{{ j }}"></div>
                         {% endfor %}
                     </div>
                     <div class="bottom item">
                         {% for j in range(1, 13) %}
                             {% if (j < 10) %}
-                                <div class="classroom-up classroom" id="{{ i + 1 }}0{{ j }}"></div>
+                                <div class="classroom-up classroom non-selectable" id="{{ i + 1 }}0{{ j }}"></div>
                             {% else %}
-                                <div class="classroom-up classroom" id="{{ i + 1 }}{{ j }}"></div>
+                                <div class="classroom-up classroom non-selectable" id="{{ i + 1 }}{{ j }}"></div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div class="floorcenter"></div>
                 </div>
             {% endfor %}
+            <div id="allrooms">
+                Rooms
+            </div>
         </main>
     </body>
     <script src="{{ url_for('static', filename='home.js') }}"></script>

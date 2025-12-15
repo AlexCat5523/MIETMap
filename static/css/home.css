@@ -266,4 +266,44 @@ body {
     align-self: center;
     justify-self: flex-end;
     flex-grow: 1;
+    width: 100%;
+}
+
+.info {
+    position: relative;
+    /* background-color: black; */
+    color: white;
+    z-index: 4;
+    width: fit-content;
+    height: fit-content;
+    visibility: hidden;
+    display: inline-block;
+    border: black 2px solid;
+}
+
+.info > ul {
+    list-style-type: none;
+    padding: 5px;
+}
+
+.info > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.65;
+}
+
+.classroom-up:hover > .info {
+    visibility: visible;
+    background-color: black;
+    transform: rotate(0deg);
+}
+
+.classroom-side:hover > .info {
+    visibility: visible;
+    background-color: black;
 }

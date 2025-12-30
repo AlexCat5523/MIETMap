@@ -32,6 +32,7 @@ function putclasses(data) {
             room.style.backgroundColor = ''
         }
     }
+
     for (let i = 1; i < 4; i++) {
         let floor = data['info'][String(i)]
 
@@ -47,7 +48,6 @@ function putclasses(data) {
         }
     }
 
-    // console.log(storedroomnames)
     for (let i = 0; i < storedroomnames.length; i++) {
         createInfoDiv(storedroomnames[i], document.getElementById(storedroomnames[i].slice(-3)))
     }
@@ -91,6 +91,7 @@ function showClassInfo(classroom) {
     }
     return room
 }
+
 
 function fillFreeRooms() {
     let floor = globalfloor + 1

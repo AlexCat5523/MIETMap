@@ -21,7 +21,8 @@ def get_classes(building, day, week, t) -> dict:
     
     building = list(cur.execute('SELECT value FROM buildings WHERE id=?', (building, )).fetchone())[0]
     
-    for i in cur.execute('SELECT * FROM classrooms WHERE room LIKE ? AND day=? AND dayNumber=? AND time=?', (f'{building}___%', day, str(int(week) - 1), t, )):
+    print(building, day, week, t)
+    for i in cur.execute('SELECT * FROM classrooms WHERE room LIKE ? AND day=? AND dayNumber=? AND time=?', (f'{building}%', day, week, t, )):
         if '[Лек]' in i[4]:
             chosen.add(i[:-1])
         else:

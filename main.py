@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from credentials import *
 from functions import *
-import base64
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -19,14 +18,13 @@ def main():
     if request.method == 'POST':
         try:
             reqdata = request.data.decode('utf-8').split(',')
+            # DAY and WEEK numeration starts from 0; numeration for TIME starts from 1;
             building = reqdata[0]
-            day = reqdata[1]
-            week = reqdata[2]
+            day = str(int(reqdata[1]) - 1)
+            week = str(int(reqdata[2]) - 1)
             time = reqdata[3]
             
             classes = get_classes(building, day, week, time)
-            for i in classes:
-                print(classes[i])
             return {'info': classes}
         except (TypeError, IndexError) as e:
             print('ERROR in POST request:', e)

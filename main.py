@@ -12,7 +12,7 @@ def main():
     nav_data = {
         'buildings': ['Первый корпус', 'Третий корпус', 'Четвертый корпус'],
         'days': ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-        'weeks': ['Числитель', 'Знаменатель'],
+        'weeks': ['1-й числитель', '1-й знаменатель', '2-й числитель', '2-й знаменатель'],
         'time': [f'{i}-я пара' for i in range(1, 9)],
     }
     
@@ -25,6 +25,8 @@ def main():
             time = reqdata[3]
             
             classes = get_classes(building, day, week, time)
+            for i in classes:
+                print(classes[i])
             return {'info': classes}
         except (TypeError, IndexError) as e:
             print('ERROR in POST request:', e)

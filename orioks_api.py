@@ -1,5 +1,6 @@
 import requests
 import time
+import sqlite3
 from credentials import *
 
 class Lesson():
@@ -29,7 +30,7 @@ class Lesson():
             
 
 SCHEDULE_URL = 'https://miet.ru/schedule/data'
-TEST_GROUP = 'ПИН-24'
+TEST_GROUP = 'ИВТ-24'
 
 
 def get_unformatted_groups() -> list:
@@ -60,15 +61,16 @@ def get_content_from_group(content, group) -> list:
         day, dayNumber, Time, Class, Room = int(i['Day']) - 1, int(i['DayNumber']), i['Time']['Code'], i['Class']['Name'], i['Room']['Name']
         teacher = i['Class']['TeacherFull']
         
-        lesson = [Room, day, dayNumber % 2, Time, Class, teacher, group]
+        lesson = [Room, day, dayNumber, Time, Class, teacher, group]
         if lesson not in lis:
             lis.append(lesson)
-            
+    for i in lis:
+        print(i)
     return lis
 
 def insert_group_schedule_into_db(array=list):
     for i in sorted(array, key=lambda x: x[1]):
-        db = sqlite3.connect('data\classrooms.db')
+        db = sqlite3.connect(r'data\classrooms2.db')
         cur = db.cursor()
         
         cur.execute('INSERT INTO classrooms VALUES (?, ?, ?, ?, ?, ?, ?)', i)
@@ -93,7 +95,7 @@ def request_to_schedule(one_group=False):  # ~ 2.15s for 10 operations (so for a
                 except: 
                     print(f"ERROR WITH GROUP {i}")
                     bugs.append(i)
-                time.sleep(1.5)
+                time.sleep(1)
     else:
         group = TEST_GROUP
         payload = {'group': group}
@@ -103,3 +105,6 @@ def request_to_schedule(one_group=False):  # ~ 2.15s for 10 operations (so for a
         lis.append(get_content_from_group(content, group))
     
     print(bugs)
+
+
+request_to_schedule(one_group=True)
